@@ -1,0 +1,207 @@
+
+
+/* Starting Page Background Image*/
+body, html{
+  /* background-image: url("https://i.pinimg.com/originals/1a/34/c7/1a34c74eae7f645218092b13ac2641de.jpg"); */
+  background-color: #cccccc;
+  margin:0px;
+  margin-top: 0%;
+  height:100%;
+
+}
+
+/* */
+
+#startingPage{
+  background-image: url("https://i.pinimg.com/originals/1a/34/c7/1a34c74eae7f645218092b13ac2641de.jpg");
+  margin:0px;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+/* This is for the Start Button */ 
+
+#startbutton{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border:none; 
+  background:none;
+  font-family: "Lucida Handwriting"; 
+  font-size: 50px;
+  font-weight: border;
+  color: red;
+
+}
+
+/* CharCard*/
+
+
+/* this is for the top Image line */
+
+#image-line-top{
+  display: flex;
+  align-items:start;
+  height:60%;
+  overflow-x: auto;
+  margin: 1rem 0;
+  max-width: calc(100vw - 2rem);
+}
+
+#image-line-top img {
+  flex: 0 1 auto;
+  height: 150px;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+#image-line-top img:last-child {
+  margin-right: 0;
+}
+
+/* this is for the Bottom Image line */
+
+
+#image-line-bottom{
+  display: flex;
+  align-items:end;
+  overflow-x: auto;
+  max-width: calc(100vw - 2rem);
+}
+
+#image-line-bottom img {
+  flex: 0 1 auto;
+  height: 100px;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+#image-line-bottom img:last-child {
+  margin-right: 0;
+}
+
+/* This is the main pictures */
+
+#middle-line {
+  display:flex;
+  justify-content: center;
+  
+
+}
+
+#middle-line img{
+  height:350px;
+}
+
+#playerOne {
+  position: relative;
+}
+
+#playerOne img {
+  height: 350px;
+}
+
+#playerTwo {
+  position: relative;
+}
+
+#playerTwo img {
+  height: 350px;
+}
+
+/* This is for everything*/
+
+#everything{
+  display:flex; 
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  display:none;
+  margin-bottom: 0%;
+  height:100%;
+}
+
+#totalSpaceBetween {
+  height: 250px;
+}
+
+.spacebetween {
+  height: 100px;
+}
+
+/* Ready Button */
+
+#helpMeCenter {
+  display:flex;
+  margin-left: 50%;
+
+}
+
+.buttonsRSF {
+padding: 20px 0px;
+margin:10px 4px; 
+width:10%;
+justify-content:center;
+color:#fff;
+font-family:sans-serif;
+text-transform:uppercase;
+text-align:center;
+position:relative;
+text-decoration:none;
+display:inline-block;
+}
+
+.buttonsRSF::before {
+content: '';
+position: absolute;
+bottom: 50%;
+left: 0px;
+width: 100%;
+height: 1px;
+background: #6098FF;
+display: block;
+-webkit-transform-origin: left top;
+-ms-transform-origin: left top;
+transform-origin: left top;
+-webkit-transform: scale(0, 1);
+-ms-transform: scale(0, 1);
+transform: scale(0, 1);
+-webkit-transition: transform 0.4s cubic-bezier(1, 0, 0, 1);
+transition: transform 0.4s cubic-bezier(1, 0, 0, 1) */
+}
+
+.buttonsRSF:hover::before {
+-webkit-transform-origin: right top;
+-ms-transform-origin: right top;
+transform-origin: right top;
+-webkit-transform: scale(1, 1);
+-ms-transform: scale(1, 1);
+transform: scale(1, 1)
+}
+
+
+/* Forms */
+
+
+#mapcreationform{
+  display:none;
+}
+
+#charactercreationform{
+  display:none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+#mainMenu{
+  margin-top: 0%;
+}
