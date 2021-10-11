@@ -23,22 +23,28 @@ function starter(){
 
 function startFunction(event){
   document.getElementById('startbutton').remove();
-  let mainMenu = document.createElement('ul');
-  let campaign = document.createElement('li');
-  let versus = document.createElement('li');
-  let training = document.createElement('li');
-  let creation = document.createElement('li');
-  let options  = document.createElement('li');
-  let credits  = document.createElement('li');
+  let mainMenu = document.createElement('div');
+  let campaign = document.createElement('BUTTON');
+  let versus = document.createElement('BUTTON');
+  let training = document.createElement('BUTTON');
+  let creation = document.createElement('BUTTON');
+  let options  = document.createElement('BUTTON');
+  let credits  = document.createElement('BUTTON');
   mainMenu.id = 'mainMenu';
   campaign.id = 'campaign';
-  versus.id = 'versus';
+  campaign.className = 'buttonsOnFrontPage';
+  versus.id = 'versusMainMenu';
+  versus.className = 'buttonsOnFrontPage';
   training.id = 'training';
+  training.className = 'buttonsOnFrontPage';
   creation.id = 'creation';
+  creation.className = 'buttonsOnFrontPage';
   options.id = 'options';
+  options.className = 'buttonsOnFrontPage';
   credits.id = 'options';
+  credits.className = 'buttonsOnFrontPage';
   campaign.textContent = 'campaign'.toUpperCase();
-  versus.textContent = 'versus'.toUpperCase();
+  versus.textContent = 'Versus'.toUpperCase();
   versus.addEventListener('click', versusMode)
   training.textContent = 'training'.toUpperCase();
   creation.textContent = 'workshop'.toUpperCase();
@@ -201,6 +207,7 @@ function fightButtonFunction (map){
 
   let tussle = document.createElement('BUTTON');
   tussle.id = 'tussle';
+  tussle.className = 'buttonsRSF';
   tussle.textContent = 'Tussle';
   document.getElementById('helpMeCenter').append(tussle);
   tussle.addEventListener('click',tussling)
@@ -211,9 +218,11 @@ function tussling (){
   tussle.remove();
   let runItBack = document.createElement('BUTTON');
   runItBack.id = 'runitback';
+  runItBack.className = 'buttonsRSF';
   runItBack.textContent = 'Run It Back'
   let StartANewGame = document.createElement('BUTTON');
   StartANewGame.id = 'StartANewGame';
+  StartANewGame.className = 'buttonsRSF';
   StartANewGame.textContent = 'Start A New Game'
   runItBack.addEventListener('click',()=>{
     console.log('bye')
@@ -230,33 +239,63 @@ function generateCharCardTop (character,anchorOfImage) {
   let charCard = document.createElement('div');
   let imgOfChar = document.createElement('img');
   let nameOfChar = document.createElement('h3');
-  charCard.className = 'charCard';
+  charCard.className = 'charCardTop';
   nameOfChar.textContent = character.name;
   imgOfChar.src = character.face;
   imgOfChar.alt = character.desc;
   charCard.append(imgOfChar, nameOfChar);
   anchorOfImage.append(charCard);
-  charCard.addEventListener('click',()=>{
-    document.getElementById('playerOnePic').src = character.image;
-  })
+  charCard.addEventListener('click',()=>setMainChar('playerTwoPic', character))
+  charCard.addEventListener('click',() => highlightCard('charCardTop',charCard, 'red'))
+  charCard.addEventListener('mouseover',() => highlightingFont(nameOfChar))
+  charCard.addEventListener('mouseout',() => highlightingFontOff(nameOfChar))
+}
 
+function highlightCard(nameOfLine,charCard,color){
+  unhighlight(nameOfLine)
+  charCard.style.border = `thick solid ${color}`
+}
+
+function unhighlight(nameOfLine){
+  let cards = document.getElementsByClassName(nameOfLine);
+  for (const card of cards) {
+    card.style.border = "thick solid white"
+  }
 }
 
 function generateCharCardBottom (character,anchorOfImage) {
   let charCard = document.createElement('div');
   let imgOfChar = document.createElement('img');
   let nameOfChar = document.createElement('h3');
-  charCard.className = 'charCard';
+  charCard.className = 'charCardBottom';
   nameOfChar.textContent = character.name;
-  imgOfChar.src = character.image;
+  imgOfChar.src = character.face;
   imgOfChar.alt = character.desc;
   charCard.append(imgOfChar, nameOfChar);
   charCard.append(imgOfChar);
   anchorOfImage.append(charCard);
-  charCard.addEventListener('click',()=>{
-    document.getElementById('playerTwoPic').src = character.image;
-  })
+  charCard.addEventListener('click',()=>setMainChar('playerOnePic', character))
+  charCard.addEventListener('mouseover',() => highlightingFont(nameOfChar))
+  charCard.addEventListener('mouseout',() => highlightingFontOff(nameOfChar))
+  charCard.addEventListener('click',() => highlightCard('charCardBottom',charCard, 'blue'))
 }
+
+
+function setMainChar(pictureYouAreSetting, character){
+  document.getElementById(pictureYouAreSetting).src = character.image;
+}
+
+function highlightingFont(nameOfChar){
+
+  nameOfChar.style.background = 'yellow';
+
+}
+
+function highlightingFontOff(nameOfChar){
+  nameOfChar.style.background = "white";
+}
+
+
 
 function PostNewCharacter(){
   let newName = document.getElementById('fname').value
