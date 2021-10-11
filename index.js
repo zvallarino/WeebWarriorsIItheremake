@@ -8,13 +8,14 @@ let formNewCharacter = document.getElementById('charactercreationform');
 let formNewMap = document.getElementById('mapcreationform');
 mainMenuButton.textContent = 'Main Menu';
 mainMenuButton.id = 'mainMenuButton'
+mainMenuButton.className = 'redButtonsThatLookCool'
+
 mainMenuButton.addEventListener('click', refreshPage)
 
 
 function init(){
 starter()
 fetchObjects('characters')
-// fetchObjects('maps')
 }
 // Starter function and Start button is unrelated to RSF button
 
@@ -32,29 +33,28 @@ function startFunction(event){
   let credits  = document.createElement('BUTTON');
   mainMenu.id = 'mainMenu';
   campaign.id = 'campaign';
-  campaign.className = 'buttonsOnFrontPage';
+  campaign.className = 'redButtonsThatLookCool';
   versus.id = 'versusMainMenu';
-  versus.className = 'buttonsOnFrontPage';
+  versus.className = 'redButtonsThatLookCool';
   training.id = 'training';
-  training.className = 'buttonsOnFrontPage';
+  training.className = 'redButtonsThatLookCool';
   creation.id = 'creation';
-  creation.className = 'buttonsOnFrontPage';
+  creation.className = 'redButtonsThatLookCool';
   options.id = 'options';
-  options.className = 'buttonsOnFrontPage';
+  options.className = 'redButtonsThatLookCool';
   credits.id = 'options';
-  credits.className = 'buttonsOnFrontPage';
-  campaign.textContent = 'campaign'.toUpperCase();
-  versus.textContent = 'Versus'.toUpperCase();
+  credits.className = 'redButtonsThatLookCool';
+  campaign.textContent = 'CAMPAIGN';
+  versus.textContent = 'VERSUS';
   versus.addEventListener('click', versusMode)
-  training.textContent = 'training'.toUpperCase();
-  creation.textContent = 'workshop'.toUpperCase();
+  training.textContent = 'TRAINING';
+  creation.textContent = 'WORKSHOP';
   creation.addEventListener('click', creating)
-  options.textContent = 'options'.toUpperCase();
-  credits.textContent = 'credits '.toUpperCase();
+  options.textContent = 'OPTIONS';
+  credits.textContent = 'CREDITS ';
   mainMenu.append(campaign,versus,training,creation, options, credits)
   document.getElementById('startingPage').append(mainMenu)
   document.getElementById('startingPage').style.backgroundImage = "url('https://wallpaperaccess.com/full/1118941.jpg')"
-
 }
 
 // Starter function and Start button is unrelated to RSF button
@@ -63,21 +63,20 @@ function creating(){
   let createNewCharacter = document.createElement("BUTTON");
   createNewCharacter.textContent = 'Create New Character';
   createNewCharacter.id = 'createNewCharacter';
-  createNewCharacter.addEventListener('click',ButtoncreatingNewCharacter)
+  createNewCharacter.className = 'redButtonsThatLookCool';
+  createNewCharacter.addEventListener('click',buttoncreatingNewCharacter)
   let createNewMap = document.createElement("BUTTON");
   createNewMap.textContent = 'Create New Map';
   createNewMap.id = 'createNewMap';
-  createNewMap.addEventListener('click',ButtoncreatingMap)
-  document.getElementById('startingPage').append(createNewCharacter,createNewMap,mainMenuButton)
-  document.getElementById('mainMenu').remove();
-  console.log('hello')
-  // document.body.style.backgroundImage = "url('https://wallpaperaccess.com/full/1118941.jpg')";
+  createNewMap.className = 'redButtonsThatLookCool';
+  createNewMap.addEventListener('click',buttoncreatingMap)
+  document.getElementById('mainMenu').replaceChildren();
+  document.getElementById('mainMenu').append(createNewCharacter,createNewMap,mainMenuButton);
 }
 
 //Create New Character Function//
 
-function ButtoncreatingNewCharacter(){
-  console.log('hello');
+function buttoncreatingNewCharacter(){
   buttonRemoval();
   document.getElementById('charactercreationform').style.display ='flex';
   submitNewCharacter();
@@ -93,8 +92,7 @@ formNewCharacter.addEventListener('submit',(e)=>
 
 //Create New Map Function//
 
-function ButtoncreatingMap(){
-  console.log('hello');
+function buttoncreatingMap(){
   buttonRemoval();
   document.getElementById('mapcreationform').style.display ='flex';
   submitNewMap();
@@ -112,8 +110,7 @@ function submitNewMap(){
 
 function buttonRemoval(){
   document.getElementById('createNewCharacter').remove()
-  document.getElementById('createNewMap').remove()
-  
+  document.getElementById('createNewMap').remove() 
 }
 
 function versusMode(){
@@ -129,7 +126,6 @@ buttonRSF.addEventListener('click',setRemoves)
 
 
 function setRemoves (event){
-  console.log('Hello from the other side')
   buttonRSF.textContent = 'SET';
   console.log(document.getElementById('image-line-bottom'))
   document.getElementById('image-line-bottom').replaceChildren();
@@ -140,7 +136,6 @@ function setRemoves (event){
 function setFight(){
   buttonRSF.remove();
   let setFightBtn = document.createElement('BUTTON');
-  console.log(setFightBtn);
   setFightBtn.id = 'setFightBtn'
   setFightBtn.textContent ='FIGHT' 
   setFightBtn.addEventListener('click',()=>{
@@ -150,26 +145,38 @@ function setFight(){
 
 }
 
-function fightButton (){
-  
-}
-
 function fetchObjects (data){
   fetch(baseURL + data)
   .then(response => response.json())
   .then(objectXs => {
     objectXs.forEach((objectX)=>{
-    generateCharCardTop(objectX,ImageAnchorTop);
+    generateCharCard(objectX,ImageAnchorTop,'charCardTop','playerTwoPic','red');
     }
     )
     //generates the top
     objectXs.forEach((objectX)=>{
-    generateCharCardBottom(objectX,ImageAnchorBottom);
+    generateCharCard(objectX,ImageAnchorBottom,'charCardBottom','playerOnePic','blue');
     }
     )
   }
   )
   //generates the bottom
+}
+
+function generateCharCard (character,anchorOfImage,nameOfClass,nameOfPic,color) {
+  let charCard = document.createElement('div');
+  let imgOfChar = document.createElement('img');
+  let nameOfChar = document.createElement('h3');
+  charCard.className = nameOfClass;
+  nameOfChar.textContent = character.name;
+  imgOfChar.src = character.face;
+  imgOfChar.alt = character.desc;
+  charCard.append(imgOfChar, nameOfChar);
+  anchorOfImage.append(charCard);
+  charCard.addEventListener('click',()=>setMainChar(nameOfPic, character))
+  charCard.addEventListener('click',() => highlightCard(nameOfClass,charCard,color))
+  charCard.addEventListener('mouseover',() => highlightingFont(nameOfChar))
+  charCard.addEventListener('mouseout',() => highlightingFontOff(nameOfChar))
 }
 
 function fetchMaps (data){
@@ -189,6 +196,7 @@ function fetchMaps (data){
   )
 }
 
+
 function clickFunctionForPictureofMap (map){
     document.getElementById('versuspicture').src=map.image;
     let switchFromSetToFight = document.getElementById('buttonRSF')
@@ -204,7 +212,6 @@ function fightButtonFunction (map){
   document.getElementById('everything').style.backgroundImage = `url(${mapSelected})`;
   document.getElementById('versuspicture').style.display = "none";
   document.getElementById('thisisthefightbutton').remove();
-
   let tussle = document.createElement('BUTTON');
   tussle.id = 'tussle';
   tussle.className = 'buttonsRSF';
@@ -235,21 +242,9 @@ function refreshPage(){
   location.reload();
 }
 
-function generateCharCardTop (character,anchorOfImage) {
-  let charCard = document.createElement('div');
-  let imgOfChar = document.createElement('img');
-  let nameOfChar = document.createElement('h3');
-  charCard.className = 'charCardTop';
-  nameOfChar.textContent = character.name;
-  imgOfChar.src = character.face;
-  imgOfChar.alt = character.desc;
-  charCard.append(imgOfChar, nameOfChar);
-  anchorOfImage.append(charCard);
-  charCard.addEventListener('click',()=>setMainChar('playerTwoPic', character))
-  charCard.addEventListener('click',() => highlightCard('charCardTop',charCard, 'red'))
-  charCard.addEventListener('mouseover',() => highlightingFont(nameOfChar))
-  charCard.addEventListener('mouseout',() => highlightingFontOff(nameOfChar))
-}
+
+
+
 
 function highlightCard(nameOfLine,charCard,color){
   unhighlight(nameOfLine)
@@ -263,34 +258,14 @@ function unhighlight(nameOfLine){
   }
 }
 
-function generateCharCardBottom (character,anchorOfImage) {
-  let charCard = document.createElement('div');
-  let imgOfChar = document.createElement('img');
-  let nameOfChar = document.createElement('h3');
-  charCard.className = 'charCardBottom';
-  nameOfChar.textContent = character.name;
-  imgOfChar.src = character.face;
-  imgOfChar.alt = character.desc;
-  charCard.append(imgOfChar, nameOfChar);
-  charCard.append(imgOfChar);
-  anchorOfImage.append(charCard);
-  charCard.addEventListener('click',()=>setMainChar('playerOnePic', character))
-  charCard.addEventListener('mouseover',() => highlightingFont(nameOfChar))
-  charCard.addEventListener('mouseout',() => highlightingFontOff(nameOfChar))
-  charCard.addEventListener('click',() => highlightCard('charCardBottom',charCard, 'blue'))
-}
-
-
 function setMainChar(pictureYouAreSetting, character){
   document.getElementById(pictureYouAreSetting).src = character.image;
 }
 
 function highlightingFont(nameOfChar){
-
   nameOfChar.style.background = 'yellow';
 
 }
-
 function highlightingFontOff(nameOfChar){
   nameOfChar.style.background = "white";
 }

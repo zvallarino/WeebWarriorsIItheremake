@@ -10,9 +10,7 @@
 </head>
 <body>
 <div id = 'startingPage'>
-<button id ='startbutton'>START</button>
-</div>
-<form id = "charactercreationform">
+  <form id = "charactercreationform">
   <label for="name">Name</label>
   <input type="text" id="fname" name="firstname" placeholder="Name of the Legend">
 
@@ -32,26 +30,29 @@
     <option value="Villian">Villian</option>
   </select>
   <input id = 'submitbutton' type="submit" value="Create New Character!">
-</form>
+  </form>
 
-<form id = "mapcreationform">
-  <label for="nameOfMap">Name</label>
-  <input type="text" id="mname" name="mapname" placeholder="Name of the Location">
+  <form id = "mapcreationform">
+    <label for="nameOfMap">Name</label>
+    <input type="text" id="mname" name="mapname" placeholder="Name of the Location">
+  
+    <label for="desc">Description</label>
+    <input type="text" id="descMap" name="descMap" placeholder="Description of Location">
+  
+    <label for="location">Image of Place</label>
+    <input type="text" id="lpic" name="locationpic" placeholder="Location Picture Here">
+  
+    <label for="allegiance"> Allegiance </label>
+    <select id="allegiance" name="allegiancepicker">
+      <option value="Hero">Hero</option>
+      <option value="Neutral">Neutral</option>
+      <option value="Villian">Villian</option>
+    </select>
+    <input type="submit" value="Create New Map">
+  </form>
 
-  <label for="desc">Description</label>
-  <input type="text" id="descMap" name="descMap" placeholder="Description of Location">
-
-  <label for="location">Image of Place</label>
-  <input type="text" id="lpic" name="locationpic" placeholder="Location Picture Here">
-
-  <label for="allegiance"> Allegiance </label>
-  <select id="allegiance" name="allegiancepicker">
-    <option value="Hero">Hero</option>
-    <option value="Neutral">Neutral</option>
-    <option value="Villian">Villian</option>
-  </select>
-  <input type="submit" value="Create New Map">
-</form>
+<button id ='startbutton'>START</button>
+</div>
 <div id='everything'>
 <div id = 'image-line-top' class = 'image-line'></div>
 <div id ='totalSpaceBetween'></div>
@@ -59,8 +60,12 @@
 <div id = 'playerOne'>
 <img id = 'playerOnePic' src="https://i1.sndcdn.com/artworks-yYY8sJZw7LDftjup-zYG4Bg-t500x500.jpg" alt = "placeholder image"> 
 </div>
+<div className ='peoplespacing' id = 'boxone'>
+</div>
 <div id = 'versus'>
 <img id = 'versuspicture' src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/versus-crbn-dsgn.jpg" alt="versus">
+</div>
+<div className ='peoplespacing' id = 'boxtwo'>
 </div>
 
 <div id = 'playerTwo'>
