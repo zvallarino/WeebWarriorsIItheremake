@@ -222,6 +222,7 @@ function fightButtonFunction (map){
 }
 
 function tussling (){
+  fighting ();
   tussle.remove();
   let runItBack = document.createElement('BUTTON');
   runItBack.id = 'runitback';
@@ -319,7 +320,17 @@ function PostNewMap(){
   .then(objectreturned =>console.log("Lets Go"))
 }
 
+// fighting function
 
+function fighting (){
+  let num = Math.random();
+
+if (num < 0.5) {
+  alert("Player One Wins");
+} else {
+  alert("Player Two Wins");
+}
+}
 
 
 // function setToPlayerOne()
